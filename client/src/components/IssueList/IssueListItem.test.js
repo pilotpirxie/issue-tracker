@@ -7,6 +7,7 @@ test('should render single issue with specific data', () => {
     title="Issue Title"
     description="Lorem ipsum dolor sit amet."
     status="DONE"
+    id={1}
   />);
 
   expect(getByText('Issue Title')).toBeTruthy();

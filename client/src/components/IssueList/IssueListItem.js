@@ -13,9 +13,15 @@ const badges = {
 };
 
 const IssueListItem = ({
-  title, description, status,
+  title, description, status, id, onSetIssueStatus, onShowIssueDetails,
 }) => (
-  <div className="list-group-item d-flex justify-content-between cursor-pointer">
+  <div
+    role="link"
+    className="list-group-item d-flex justify-content-between cursor-pointer"
+    onClick={() => onShowIssueDetails(id)}
+    onKeyDown={() => onShowIssueDetails(id)}
+    tabIndex={-1}
+  >
     <div className="left">
       <div className="d-flex">
         <div className="d-flex align-items-center justify-content-center">
@@ -28,13 +34,25 @@ const IssueListItem = ({
       </div>
     </div>
     <div className="d-flex justify-content-center align-items-center">
-      <div className="btn btn-sm btn-success">
+      <div
+        role="button"
+        className="btn btn-sm btn-success"
+        onClick={() => onSetIssueStatus(id, 'DONE')}
+        onKeyDown={() => onSetIssueStatus(id, 'DONE')}
+        tabIndex={-1}
+      >
         <img
           src={doneIcon}
           alt="Complete issue"
         />
       </div>
-      <div className="btn btn-sm btn-primary ml-2">
+      <div
+        role="button"
+        className="btn btn-sm btn-primary ml-2"
+        onClick={() => onSetIssueStatus(id, 'PENDING')}
+        onKeyDown={() => onSetIssueStatus(id, 'PENDING')}
+        tabIndex={-1}
+      >
         <img
           src={startIcon}
           alt="Start working on issue"
@@ -45,9 +63,17 @@ const IssueListItem = ({
 );
 
 IssueListItem.propTypes = {
+  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   status: PropTypes.oneOf(['TODO', 'PENDING', 'DONE']).isRequired,
+  onShowIssueDetails: PropTypes.func,
+  onSetIssueStatus: PropTypes.func,
+};
+
+IssueListItem.defaultProps = {
+  onShowIssueDetails: () => {},
+  onSetIssueStatus: () => {},
 };
 
 export default IssueListItem;

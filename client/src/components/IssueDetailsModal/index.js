@@ -40,7 +40,7 @@ const IssueDetailsModal = ({
       <button
         type="button"
         className="btn btn-primary"
-        onClick={() => onSubmit}
+        onClick={() => onSubmit()}
       >
         {primaryButtonText}
       </button>

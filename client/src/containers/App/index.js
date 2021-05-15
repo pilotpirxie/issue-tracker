@@ -8,6 +8,9 @@ import IssueDetailsModal from '../../components/IssueDetailsModal';
 function App() {
   const [issues, setIssues] = useState([]);
 
+  const handleShowIssueDetails = (issueId) => issueId;
+  const handleSetIssueStatus = (issueId, status) => [issueId, status];
+
   useEffect(() => {
     setIssues([{
       id: 1,
@@ -21,10 +24,18 @@ function App() {
     <div className="App">
       <Navbar />
       <Layout>
-        <IssueList issues={issues} />
+        <IssueList
+          issues={issues}
+          onShowIssueDetails={handleShowIssueDetails}
+          onSetIssueStatus={handleSetIssueStatus}
+        />
         <IssueDetailsModal
           isVisible
           primaryButtonText="Submit"
+          cancelButtonText="Cancel"
+          title="Issue Title"
+          onClose={() => {}}
+          onSubmit={() => {}}
         >
           <p>Test</p>
         </IssueDetailsModal>
