@@ -15,7 +15,8 @@
     "eslint": "^7.26.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.2",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "sequelize-auto": "^0.8.2"
   },
   "scripts": {
     "start": "node index.js",

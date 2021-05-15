@@ -22,5 +22,5 @@ const sql = new Sequelize(
 
 module.exports = {
   connection: sql,
-  dataTypes: Sequelize.dataTypes,
+  dataTypes: Sequelize.DataTypes,
 };

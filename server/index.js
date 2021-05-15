@@ -19,9 +19,11 @@ app.disable('x-powered-by');
 app.use(bodyParser.json());
 app.use(helmet());
 
-app.get('/ping', (req, res) => res.json({
-  msg: 'pong',
-}));
+app.get('/ping', async (req, res) => {
+  return res.json({
+    msg: 'pong',
+  });
+});
 
 app.listen(app.get('port'), () => {
   console.info(`App is listening on port: ${app.get('port')}`);
