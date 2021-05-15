@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import App from './index';
 
-test('renders learn react link', () => {
+test('should contains navbar somewhere on the screen', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
+  const linkElement = screen.getByText('Issue Tracker');
   expect(linkElement).toBeInTheDocument();
 });
