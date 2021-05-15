@@ -30,13 +30,15 @@ module.exports = function (sequelize, DataTypes) {
         key: 'id',
       },
     },
-    create_at: {
+    created_at: {
       type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: sequelize.fn('now'),
     },
     updated_at: {
       type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: sequelize.fn('now'),
     },
   }, {
     sequelize,

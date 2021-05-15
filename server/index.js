@@ -19,10 +19,21 @@ app.disable('x-powered-by');
 app.use(bodyParser.json());
 app.use(helmet());
 
-app.get('/ping', async (req, res) => {
-  return res.json({
-    msg: 'pong',
-  });
+app.get('/ping', async (req, res) => res.json({
+  msg: 'pong',
+}));
+
+app.use(require('./routes/boards'));
+
+app.use((err, req, res, next) => {
+  if (res.headersSent) {
+    return next(err);
+  }
+
+  if (err) {
+    console.error(err);
+    return res.sendStatus(500);
+  }
 });
 
 app.listen(app.get('port'), () => {

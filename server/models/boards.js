@@ -10,13 +10,15 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING(255),
       allowNull: false,
     },
-    create_at: {
+    created_at: {
       type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: sequelize.fn('now'),
     },
     updated_at: {
       type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: sequelize.fn('now'),
     },
   }, {
     sequelize,
