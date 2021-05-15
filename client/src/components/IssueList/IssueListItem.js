@@ -29,10 +29,16 @@ const IssueListItem = ({
     </div>
     <div className="d-flex justify-content-center align-items-center">
       <div className="btn btn-sm btn-success">
-        <img src={doneIcon} alt="Complete issue" />
+        <img
+          src={doneIcon}
+          alt="Complete issue"
+        />
       </div>
       <div className="btn btn-sm btn-primary ml-2">
-        <img src={startIcon} alt="Start working on issue" />
+        <img
+          src={startIcon}
+          alt="Start working on issue"
+        />
       </div>
     </div>
   </div>

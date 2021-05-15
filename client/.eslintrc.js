@@ -4,6 +4,7 @@ module.exports = {
     es2021: true,
   },
   extends: [
+    'plugin:jest/recommended',
     'plugin:react/recommended',
     'airbnb',
   ],
@@ -16,6 +17,7 @@ module.exports = {
   },
   plugins: [
     'react',
+    'jest',
   ],
   rules: {
     'react/jsx-filename-extension': 'off',
