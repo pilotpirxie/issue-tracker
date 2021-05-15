@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Layout = ({ children }) => (
   <div className="container mt-3">
@@ -9,5 +10,9 @@ const Layout = ({ children }) => (
     </div>
   </div>
 );
+
+Layout.propTypes = {
+  children: PropTypes.element.isRequired,
+};
 
 export default Layout;
