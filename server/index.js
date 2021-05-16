@@ -24,6 +24,7 @@ app.get('/ping', async (req, res) => res.json({
 }));
 
 app.use(require('./routes/boards'));
+app.use(require('./routes/issues'));
 
 app.use((err, req, res, next) => {
   if (res.headersSent) {
