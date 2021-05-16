@@ -14,7 +14,7 @@ sql.connection.sync().then(() => {
 });
 
 app.set('trust proxy', 1);
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3001);
 app.disable('x-powered-by');
 app.use(bodyParser.json());
 app.use(helmet());

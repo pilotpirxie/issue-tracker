@@ -6,14 +6,10 @@ import startIcon from './images/chevron_right_white_24dp.svg';
 
 import './IssueList.css';
 
-const badges = {
-  todo: 'badge-secondary',
-  pending: 'badge-primary',
-  done: 'badge-success',
-};
+import { badges, badgesLabel } from '../../utils/constants';
 
 const IssueListItem = ({
-  title, description, status, id, onSetIssueStatus, onShowIssueDetails,
+  title, status, id, onSetIssueStatus, onShowIssueDetails,
 }) => (
   <div
     role="link"
@@ -22,15 +18,12 @@ const IssueListItem = ({
     onKeyDown={() => onShowIssueDetails(id)}
     tabIndex={-1}
   >
-    <div className="left">
+    <div className="d-flex align-items-center justify-content-center">
       <div className="d-flex">
-        <div className="d-flex align-items-center justify-content-center">
-          <div className={`badge ${badges[status.toLowerCase()]} text-capitalize`}>{status}</div>
-        </div>
-        <div className="ml-3">
-          <b>{title}</b>
-          <p className="m-0">{description}</p>
-        </div>
+        <div className={`badge ${badges[status]} text-capitalize`}>{badgesLabel[status]}</div>
+      </div>
+      <div className="ml-3">
+        <b>{title}</b>
       </div>
     </div>
     <div className="d-flex justify-content-center align-items-center">
@@ -65,8 +58,7 @@ const IssueListItem = ({
 IssueListItem.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  status: PropTypes.oneOf(['TODO', 'PENDING', 'DONE']).isRequired,
+  status: PropTypes.oneOf([0, 1, 2]).isRequired,
   onShowIssueDetails: PropTypes.func,
   onSetIssueStatus: PropTypes.func,
 };

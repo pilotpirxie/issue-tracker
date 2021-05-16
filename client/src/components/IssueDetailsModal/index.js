@@ -1,9 +1,10 @@
 import React from 'react';
 import Modal from 'react-bootstrap4-modal';
 import PropTypes from 'prop-types';
+import { badges, badgesLabel } from '../../utils/constants';
 
 const IssueDetailsModal = ({
-  children, onClose, isVisible, cancelButtonText, primaryButtonText, title, onSubmit,
+  onClose, isVisible, onRemoveIssue, onSetIssueStatus, issue,
 }) => (
   <Modal
     visible={isVisible}
@@ -12,39 +13,47 @@ const IssueDetailsModal = ({
     dialogClassName="modal-lg"
   >
     <div className="modal-header">
-      <h5 className="modal-title">{title}</h5>
+      <h5 className="modal-title d-flex align-items-center">
+        <div className={`badge ${badges[issue.status]} text-capitalize mr-2`}>
+          {badgesLabel[issue.status]}
+        </div>
+        {issue.title}
+      </h5>
       <button
         type="button"
         className="close"
         data-dismiss="modal"
         aria-label="Close"
+        onClick={() => onClose()}
       >
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div className="modal-body">
-      {children}
+      {issue.description}
     </div>
     <div className="modal-footer">
-      {cancelButtonText && (
       <button
         type="button"
-        className="btn btn-secondary"
-        data-dismiss="modal"
-        onClick={() => onClose}
+        className="btn btn-outline-danger"
+        onClick={() => onRemoveIssue(issue.id)}
       >
-        {cancelButtonText}
+        Remove
       </button>
-      )}
-      {primaryButtonText && (
       <button
         type="button"
         className="btn btn-primary"
-        onClick={() => onSubmit()}
+        onClick={() => onSetIssueStatus(issue.id, 1)}
       >
-        {primaryButtonText}
+        Pending
       </button>
-      )}
+      <button
+        type="button"
+        className="btn btn-success"
+        onClick={() => onSetIssueStatus(issue.id, 2)}
+      >
+        Done
+      </button>
     </div>
   </Modal>
 );
@@ -52,24 +61,17 @@ const IssueDetailsModal = ({
 IssueDetailsModal.propTypes = {
   isVisible: PropTypes.bool.isRequired,
   onClose: PropTypes.func,
-  onSubmit: PropTypes.func,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element,
-  ]).isRequired,
-  title: PropTypes.string,
-  cancelButtonText: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.bool,
-  ]),
-  primaryButtonText: PropTypes.string.isRequired,
+  onRemoveIssue: PropTypes.func,
+  onSetIssueStatus: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
+  issue: PropTypes.object,
 };
 
 IssueDetailsModal.defaultProps = {
-  cancelButtonText: false,
-  title: '',
   onClose: () => {},
-  onSubmit: () => {},
+  onRemoveIssue: () => {},
+  onSetIssueStatus: () => {},
+  issue: {},
 };
 
 export default IssueDetailsModal;

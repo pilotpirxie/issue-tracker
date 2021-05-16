@@ -7,7 +7,7 @@ test('should render issue list with valid issues', () => {
     id: 1,
     title: 'This is Issue Title.',
     description: 'Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.',
-    status: 'PENDING',
+    status: '0',
   }];
 
   const { getByText } = render(<IssueList issues={issues} />);
@@ -21,7 +21,7 @@ test('should list be clickable and calls passed methods', () => {
     id: 1,
     title: 'This is Issue Title.',
     description: 'Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.',
-    status: 'PENDING',
+    status: '0',
   }];
 
   let clickedIssueId = 0;

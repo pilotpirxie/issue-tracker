@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Joi = require('joi');
+const { Op } = require('sequelize');
 
 const { Boards, Issues } = require('../models');
 const validation = require('../utils/validation');
@@ -94,6 +95,9 @@ router.put('/issues/:issueId/', [validation({
       where: {
         board_id: board.id,
         id: issueId,
+        status: {
+          [Op.lt]: status,
+        },
       },
     });
 
@@ -135,12 +139,16 @@ router.delete('/issues/:issueId/', [validation({
 
     if (!board) return res.sendStatus(404);
 
-    await Issues.destroy({
+    const issue = await Issues.findOne({
       where: {
         board_id: board.id,
         id: issueId,
       },
     });
+
+    if (!issue) return res.sendStatus(404);
+
+    await issue.destroy();
 
     return res.sendStatus(200);
   } catch (err) {

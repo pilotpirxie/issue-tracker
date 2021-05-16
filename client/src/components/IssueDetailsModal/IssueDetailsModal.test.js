@@ -18,12 +18,10 @@ test('should render correct modal', () => {
   expect(getByText(/Submit/i)).toBeTruthy();
 });
 
-test('should render modal with cancel button', () => {
+test('should render modal with pending button', () => {
   const { getByText } = render(
     <IssueDetailsModal
       isVisible
-      primaryButtonText="Submit"
-      cancelButtonText="Cancel"
     >
       <p>Lorem ipsum</p>
     </IssueDetailsModal>,

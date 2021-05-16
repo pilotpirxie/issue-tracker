@@ -11,7 +11,6 @@ const IssueList = ({ issues, onSetIssueStatus, onShowIssueDetails }) => (
         id={issue.id}
         status={issue.status}
         title={issue.title}
-        description={issue.description}
         onShowIssueDetails={onShowIssueDetails}
         onSetIssueStatus={onSetIssueStatus}
       />

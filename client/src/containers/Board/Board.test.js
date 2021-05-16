@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import App from './index';
+import Board from './index';
 
 test('should contains navbar somewhere on the screen', () => {
-  render(<App />);
+  render(<Board />);
   const linkElement = screen.getByText('Issue Tracker');
   expect(linkElement).toBeInTheDocument();
 });

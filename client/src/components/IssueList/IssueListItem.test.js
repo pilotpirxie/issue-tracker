@@ -6,7 +6,7 @@ test('should render single issue with specific data', () => {
   const { getByText } = render(<IssueListItem
     title="Issue Title"
     description="Lorem ipsum dolor sit amet."
-    status="DONE"
+    status="0"
     id={1}
   />);
 
