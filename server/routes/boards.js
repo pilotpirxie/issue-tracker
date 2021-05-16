@@ -4,15 +4,6 @@ const Joi = require('joi');
 const { Boards, Issues } = require('../models');
 const validation = require('../utils/validation');
 
-router.get('/boards/', async (req, res, next) => {
-  try {
-    const boards = await Boards.findAll();
-    return res.json(boards);
-  } catch (err) {
-    return next(err);
-  }
-});
-
 router.get('/boards/:boardId/:boardKey', [validation({
   query: {},
   params: {
@@ -27,6 +18,12 @@ router.get('/boards/:boardId/:boardKey', [validation({
         id: req.params.boardId,
         key: req.params.boardKey,
       },
+      include: [{
+        model: Issues,
+        attributes: {
+          exclude: ['board_id', 'description'],
+        },
+      }],
     });
 
     if (!board) return res.sendStatus(404);

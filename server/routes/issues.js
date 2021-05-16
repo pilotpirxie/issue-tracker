@@ -63,6 +63,52 @@ router.post('/issues/', [validation({
   }
 });
 
+router.put('/issues/:issueId/', [validation({
+  query: {},
+  params: {
+    issueId: Joi.number().required(),
+  },
+  body: {
+    boardId: Joi.number().required(),
+    boardKey: Joi.string().required(),
+    status: Joi.number().min(0).max(2).required(),
+  },
+})], async (req, res, next) => {
+  try {
+    const {
+      boardId, boardKey, status,
+    } = req.body;
+
+    const { issueId } = req.params;
+
+    const board = await Boards.findOne({
+      where: {
+        id: boardId,
+        key: boardKey,
+      },
+    });
+
+    if (!board) return res.sendStatus(404);
+
+    const issue = await Issues.findOne({
+      where: {
+        board_id: board.id,
+        id: issueId,
+      },
+    });
+
+    if (!issue) return res.sendStatus(404);
+
+    await issue.update({
+      status,
+    });
+
+    return res.json(issue);
+  } catch (err) {
+    return next(err);
+  }
+});
+
 router.delete('/issues/:issueId/', [validation({
   query: {},
   params: {
