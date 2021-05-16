@@ -13,3 +13,14 @@ test('should contains board view', () => {
   expect(screen.getByText(/Issue Tracker/i)).toBeInTheDocument();
   expect(screen.getAllByText(/create/i).length).toBeGreaterThan(0);
 });
+
+test('should render home page', () => {
+  render(
+    <MemoryRouter initialEntries={['/']}>
+      <AppSwitch />
+    </MemoryRouter>,
+  );
+
+  expect(screen.getByText(/Create board in a few seconds/i)).toBeInTheDocument();
+  expect(screen.getByAltText(/Issue tracker/i)).toBeInTheDocument();
+});

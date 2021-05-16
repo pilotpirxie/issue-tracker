@@ -87,6 +87,7 @@ const NewIssueModal = ({
           type="button"
           className="btn btn-primary"
           onClick={handleSubmitForm}
+          data-testid="create-btn"
         >
           Create
         </button>

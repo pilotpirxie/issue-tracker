@@ -21,6 +21,24 @@ test('should render correct modal', () => {
   expect(getByText(/Pending/i)).toBeTruthy();
 });
 
+test('should render modal with both pending and done buttons', () => {
+  const { getByText } = render(
+    <IssueDetailsModal
+      isVisible
+      issue={{
+        status: 0,
+        title: 'Modal title',
+        description: 'Lorem ipsum...',
+      }}
+    >
+      <p>Lorem ipsum</p>
+    </IssueDetailsModal>,
+  );
+
+  expect(getByText(/Pending/i)).toBeTruthy();
+  expect(getByText(/Done/i)).toBeTruthy();
+});
+
 test('should render modal with done button', () => {
   const { getByText } = render(
     <IssueDetailsModal

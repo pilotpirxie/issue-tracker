@@ -25,6 +25,7 @@ const IssueDetailsModal = ({
         data-dismiss="modal"
         aria-label="Close"
         onClick={() => onClose()}
+        data-testid="close"
       >
         <span aria-hidden="true">&times;</span>
       </button>

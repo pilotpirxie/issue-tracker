@@ -17,6 +17,7 @@ const CustomNavbar = ({ onClickCreate }) => (
           onKeyDown={() => onClickCreate()}
           tabIndex={-1}
           role="button"
+          data-testid="create-issue-btn"
         >
           Create
         </div>
