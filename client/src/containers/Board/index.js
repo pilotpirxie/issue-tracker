@@ -5,10 +5,12 @@ import Navbar from '../../components/Navbar';
 import IssueList from '../../components/IssueList';
 import Layout from '../../components/Layout';
 import IssueDetails from '../IssueDetails';
+import NewIssue from '../NewIssue';
 
 function App() {
   const [issues, setIssues] = useState([]);
   const [selectedIssue, setSelectedIssue] = useState(-1);
+  const [isVisibleNewIssueModal, setIsVisibleNewIssueModal] = useState(false);
   const { boardId, boardKey } = useParams();
 
   const handleFetchIssues = () => {
@@ -22,13 +24,15 @@ function App() {
     handleFetchIssues();
   }, []);
 
-  const handleCloseModal = () => {
+  const handleCloseDetailsModal = () => {
     setSelectedIssue(-1);
   };
 
   return (
     <div>
-      <Navbar />
+      <Navbar
+        onClickCreate={() => setIsVisibleNewIssueModal(true)}
+      />
       <Layout>
         <IssueList
           issues={issues}
@@ -36,7 +40,12 @@ function App() {
         />
         <IssueDetails
           selectedIssue={selectedIssue}
-          onClose={handleCloseModal}
+          onClose={handleCloseDetailsModal}
+          onFetchIssues={handleFetchIssues}
+        />
+        <NewIssue
+          isVisible={isVisibleNewIssueModal}
+          onClose={() => setIsVisibleNewIssueModal(false)}
           onFetchIssues={handleFetchIssues}
         />
       </Layout>

@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const CustomNavbar = () => (
+const CustomNavbar = ({ onClickCreate }) => (
   <div>
     <div className="navbar navbar-light bg-light">
       <a
@@ -10,10 +11,22 @@ const CustomNavbar = () => (
         Issue Tracker
       </a>
       <div className="float-right">
-        <div className="btn btn-primary">Create</div>
+        <div
+          className="btn btn-primary"
+          onClick={() => onClickCreate()}
+          onKeyDown={() => onClickCreate()}
+          tabIndex={-1}
+          role="button"
+        >
+          Create
+        </div>
       </div>
     </div>
   </div>
 );
+
+CustomNavbar.propTypes = {
+  onClickCreate: PropTypes.func.isRequired,
+};
 
 export default CustomNavbar;
