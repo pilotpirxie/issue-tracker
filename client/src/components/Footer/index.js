@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Index = () => (
-  <footer className="mt-5">
+  <footer className="container mt-5">
     <div className="row">
       <div className="col">
         <div className="d-flex justify-content-center">
