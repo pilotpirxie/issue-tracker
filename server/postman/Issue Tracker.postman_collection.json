@@ -1,0 +1,207 @@
+{
+	"info": {
+		"_postman_id": "b352bc06-0a94-4489-acbd-56b8b7e1897b",
+		"name": "Issue Tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/ping",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"ping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get board by id and key",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/boards/1/yexqkby89CmMGy3rzXQShpQNt1GaLhJt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"boards",
+						"1",
+						"yexqkby89CmMGy3rzXQShpQNt1GaLhJt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get issues from board by id and key",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/boards/1/yexqkby89CmMGy3rzXQShpQNt1GaLhJt/issues",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"boards",
+						"1",
+						"yexqkby89CmMGy3rzXQShpQNt1GaLhJt",
+						"issues"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create new board",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"key\": \"asdasdasd\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/boards/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"boards",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get single issue by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/issues/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"issues",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create new issue",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"boardKey\": \"yexqkby89CmMGy3rzXQShpQNt1GaLhJt\",\r\n    \"boardId\": \"1\",\r\n    \"title\": \"Test\",\r\n    \"description\": \"Lorem ipsum...\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/issues/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"issues",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove issue",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"boardKey\": \"yexqkby89CmMGy3rzXQShpQNt1GaLhJt\",\r\n    \"boardId\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/issues/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"issues",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update issue status",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"boardKey\": \"yexqkby89CmMGy3rzXQShpQNt1GaLhJt\",\r\n    \"boardId\": \"1\",\r\n    \"status\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/issues/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"issues",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

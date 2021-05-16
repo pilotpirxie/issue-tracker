@@ -7,6 +7,7 @@ const sql = new Sequelize(
   {
     host: 'localhost',
     dialect: 'postgres',
+    logging: process.env.NODE_ENV !== 'test',
     define: {
       underscored: true,
       charset: 'utf8',

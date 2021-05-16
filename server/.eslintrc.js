@@ -5,6 +5,7 @@ module.exports = {
     es2021: true,
   },
   extends: [
+    'plugin:jest/recommended',
     'airbnb-base',
   ],
   parserOptions: {
@@ -12,4 +13,7 @@ module.exports = {
   },
   rules: {
   },
+  plugins: [
+    'jest',
+  ],
 };
