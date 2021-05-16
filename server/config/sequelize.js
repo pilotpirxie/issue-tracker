@@ -1,11 +1,12 @@
 const Sequelize = require('sequelize');
 
 const sql = new Sequelize(
-  'issue_tracker',
-  'postgres',
-  'mysecretpassword',
+  process.env.DB_NAME || 'issue_tracker',
+  process.env.DB_USER || 'postgres',
+  process.env.DB_PASS || 'mysecretpassword',
   {
-    host: 'localhost',
+    host: process.env.DB_HOST || 'localhost',
+    port: process.env.DB_PORT || 5432,
     dialect: 'postgres',
     logging: process.env.NODE_ENV !== 'test',
     define: {
