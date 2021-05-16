@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import NewIssueModal from '../../components/NewIssueModal';
 
-const NewIssue = ({ isVisible, onClose, onFetchIssues }) => {
+const NewIssue = ({
+  isVisible, onClose, onFetchIssues, onError,
+}) => {
   const { boardId, boardKey } = useParams();
 
   const handleCreateIssue = (issue) => {
@@ -21,7 +23,7 @@ const NewIssue = ({ isVisible, onClose, onFetchIssues }) => {
     }).then(() => {
       onClose();
       onFetchIssues();
-    }).catch((err) => console.error(err));
+    }).catch(() => onError('Something went wrong when creating issue'));
   };
 
   return (
@@ -37,6 +39,7 @@ NewIssue.propTypes = {
   isVisible: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onFetchIssues: PropTypes.func.isRequired,
+  onError: PropTypes.func.isRequired,
 };
 
 export default NewIssue;

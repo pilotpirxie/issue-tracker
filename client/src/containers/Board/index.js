@@ -6,10 +6,12 @@ import IssueList from '../../components/IssueList';
 import Layout from '../../components/Layout';
 import IssueDetails from '../IssueDetails';
 import NewIssue from '../NewIssue';
+import Alert from '../../components/Alert';
 
 function App() {
   const [issues, setIssues] = useState([]);
   const [selectedIssue, setSelectedIssue] = useState(-1);
+  const [alertText, setAlert] = useState('');
   const [isVisibleNewIssueModal, setIsVisibleNewIssueModal] = useState(false);
   const { boardId, boardKey } = useParams();
 
@@ -17,7 +19,7 @@ function App() {
     fetch(`http://localhost:3001/boards/${boardId}/${boardKey}`)
       .then((response) => response.json())
       .then((data) => setIssues(data.issues))
-      .catch((err) => console.error(err));
+      .catch(() => setAlert('Invalid board id'));
   };
 
   useEffect(() => {
@@ -34,6 +36,10 @@ function App() {
         onClickCreate={() => setIsVisibleNewIssueModal(true)}
       />
       <Layout>
+        <Alert
+          text={alertText}
+          onClose={() => setAlert('')}
+        />
         <IssueList
           issues={issues}
           onShowIssueDetails={setSelectedIssue}
@@ -42,11 +48,13 @@ function App() {
           selectedIssue={selectedIssue}
           onClose={handleCloseDetailsModal}
           onFetchIssues={handleFetchIssues}
+          onError={setAlert}
         />
         <NewIssue
           isVisible={isVisibleNewIssueModal}
           onClose={() => setIsVisibleNewIssueModal(false)}
           onFetchIssues={handleFetchIssues}
+          onError={setAlert}
         />
       </Layout>
     </div>

@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap4-modal';
 import PropTypes from 'prop-types';
+import Alert from '../Alert';
 
 const NewIssueModal = ({
   onClose, isVisible, onCreate,
 }) => {
   const [title, setTitle] = useState('');
+  const [errorText, setError] = useState('');
   const [description, setDescription] = useState('');
 
   const handleSubmitForm = () => {
+    if (!title || !description) {
+      setError("Title and description can't be empty");
+      return;
+    }
+
     onCreate({
       title, description,
     });
@@ -39,6 +46,10 @@ const NewIssueModal = ({
         </button>
       </div>
       <div className="modal-body">
+        <Alert
+          text={errorText}
+          onClose={() => setError('')}
+        />
         <div className="form-group">
           <label
             htmlFor="issue-title"

@@ -3,7 +3,9 @@ import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import IssueDetailsModal from '../../components/IssueDetailsModal';
 
-const IssueDetails = ({ selectedIssue, onClose, onFetchIssues }) => {
+const IssueDetails = ({
+  selectedIssue, onClose, onFetchIssues, onError,
+}) => {
   const { boardId, boardKey } = useParams();
   const [detailsIssue, setDetailsIssue] = useState(null);
 
@@ -12,7 +14,7 @@ const IssueDetails = ({ selectedIssue, onClose, onFetchIssues }) => {
     fetch(`http://localhost:3001/issues/${selectedIssue}`)
       .then((response) => response.json())
       .then((data) => setDetailsIssue(data))
-      .catch((err) => console.error(err));
+      .catch(() => onError('Something went wrong when downloading issue details'));
   }, [selectedIssue]);
 
   const handleSetIssueStatus = (id, status) => {
@@ -27,7 +29,7 @@ const IssueDetails = ({ selectedIssue, onClose, onFetchIssues }) => {
     }).then(() => {
       onClose();
       onFetchIssues();
-    }).catch((err) => console.error(err));
+    }).catch(() => onError("Can't change issue status"));
   };
 
   const handleRemoveIssue = (id) => {
@@ -41,7 +43,7 @@ const IssueDetails = ({ selectedIssue, onClose, onFetchIssues }) => {
     }).then(() => {
       onClose();
       onFetchIssues();
-    }).catch((err) => console.error(err));
+    }).catch(() => onError('Error while removing issue'));
   };
 
   return (
@@ -59,6 +61,7 @@ IssueDetails.propTypes = {
   selectedIssue: PropTypes.number.isRequired,
   onClose: PropTypes.func.isRequired,
   onFetchIssues: PropTypes.func.isRequired,
+  onError: PropTypes.func.isRequired,
 };
 
 export default IssueDetails;

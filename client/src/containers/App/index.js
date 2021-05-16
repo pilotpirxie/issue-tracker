@@ -7,14 +7,20 @@ import {
 
 import Board from '../Board';
 
+export function AppSwitch() {
+  return (
+    <Switch>
+      <Route path="/boards/:boardId/:boardKey">
+        <Board />
+      </Route>
+    </Switch>
+  );
+}
+
 function App() {
   return (
     <Router>
-      <Switch>
-        <Route path="/boards/:boardId/:boardKey">
-          <Board />
-        </Route>
-      </Switch>
+      <AppSwitch />
     </Router>
   );
 }
