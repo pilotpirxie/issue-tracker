@@ -6,10 +6,17 @@ import {
 } from 'react-router-dom';
 
 import Board from '../Board';
+import HomePage from '../HomePage';
 
 export function AppSwitch() {
   return (
     <Switch>
+      <Route
+        path="/"
+        exact
+      >
+        <HomePage />
+      </Route>
       <Route path="/boards/:boardId/:boardKey">
         <Board />
       </Route>

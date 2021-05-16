@@ -15,6 +15,7 @@ const Alert = ({ text, onClose }) => (
         onKeyDown={onClose}
         role="link"
         tabIndex={-1}
+        data-testid="close"
       >
         <span aria-hidden="true">&times;</span>
       </button>

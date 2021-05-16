@@ -15,6 +15,14 @@ test('should render issue list with valid issues', () => {
   expect(getByText(/To-Do/i)).toBeTruthy();
 });
 
+test('should render info about empty list', () => {
+  const issues = [];
+
+  const { getByText } = render(<IssueList issues={issues} />);
+
+  expect(getByText(/Board is empty/i)).toBeTruthy();
+});
+
 test('should list be clickable and calls passed methods', () => {
   const issues = [{
     id: 1,

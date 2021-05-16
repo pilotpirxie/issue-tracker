@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Joi = require('joi');
+const crypto = require('crypto');
 
 const { Boards, Issues } = require('../models');
 const validation = require('../utils/validation');
@@ -71,11 +72,11 @@ router.post('/boards/', [validation({
   query: {},
   params: {},
   body: {
-    key: Joi.string().required(),
+    key: Joi.string().optional().allow(''),
   },
 })], async (req, res, next) => {
   try {
-    const { key } = req.body;
+    const key = req.body.key ? req.body.key : crypto.randomBytes(64).toString('hex');
 
     const board = await Boards.create({
       key,
