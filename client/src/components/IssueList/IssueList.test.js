@@ -6,22 +6,20 @@ test('should render issue list with valid issues', () => {
   const issues = [{
     id: 1,
     title: 'This is Issue Title.',
-    description: 'Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.',
-    status: '0',
+    status: 0,
   }];
 
   const { getByText } = render(<IssueList issues={issues} />);
 
   expect(getByText('This is Issue Title.')).toBeTruthy();
-  expect(getByText(/Lorem ipsum/i)).toBeTruthy();
+  expect(getByText(/To-Do/i)).toBeTruthy();
 });
 
 test('should list be clickable and calls passed methods', () => {
   const issues = [{
     id: 1,
     title: 'This is Issue Title.',
-    description: 'Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.',
-    status: '0',
+    status: 0,
   }];
 
   let clickedIssueId = 0;

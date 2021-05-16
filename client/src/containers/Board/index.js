@@ -4,11 +4,11 @@ import { useParams } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import IssueList from '../../components/IssueList';
 import Layout from '../../components/Layout';
-import IssueDetailsModal from '../../components/IssueDetailsModal';
+import IssueDetails from '../IssueDetails';
 
 function App() {
   const [issues, setIssues] = useState([]);
-  const [detailsIssue, setDetailsIssue] = useState(null);
+  const [selectedIssue, setSelectedIssue] = useState(-1);
   const { boardId, boardKey } = useParams();
 
   const handleFetchIssues = () => {
@@ -18,46 +18,13 @@ function App() {
       .catch((err) => console.error(err));
   };
 
-  const handleShowIssueDetails = (issueId) => {
-    fetch(`http://localhost:3001/issues/${issueId}`)
-      .then((response) => response.json())
-      .then((data) => setDetailsIssue(data))
-      .catch((err) => console.error(err));
-  };
-  const handleCloseDetailsModal = () => setDetailsIssue(null);
-
-  const handleSetIssueStatus = (issueId, status) => {
-    fetch(`http://localhost:3001/issues/${issueId}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        boardKey,
-        boardId,
-        status,
-      }),
-    }).then(() => {
-      handleCloseDetailsModal();
-      handleFetchIssues();
-    }).catch((err) => console.error(err));
-  };
-
-  const handleRemoveIssue = (issueId) => {
-    fetch(`http://localhost:3001/issues/${issueId}`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        boardKey,
-        boardId,
-      }),
-    }).then(() => {
-      handleCloseDetailsModal();
-      handleFetchIssues();
-    }).catch((err) => console.error(err));
-  };
-
   useEffect(() => {
     handleFetchIssues();
   }, []);
+
+  const handleCloseModal = () => {
+    setSelectedIssue(-1);
+  };
 
   return (
     <div>
@@ -65,15 +32,12 @@ function App() {
       <Layout>
         <IssueList
           issues={issues}
-          onShowIssueDetails={handleShowIssueDetails}
-          onSetIssueStatus={handleSetIssueStatus}
+          onShowIssueDetails={setSelectedIssue}
         />
-        <IssueDetailsModal
-          isVisible={!!detailsIssue}
-          onClose={handleCloseDetailsModal}
-          onRemoveIssue={handleRemoveIssue}
-          onSetIssueStatus={handleSetIssueStatus}
-          issue={detailsIssue || undefined}
+        <IssueDetails
+          selectedIssue={selectedIssue}
+          onClose={handleCloseModal}
+          onFetchIssues={handleFetchIssues}
         />
       </Layout>
     </div>

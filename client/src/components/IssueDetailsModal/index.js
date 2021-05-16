@@ -40,6 +40,7 @@ const IssueDetailsModal = ({
       >
         Remove
       </button>
+      {issue.status < 1 && (
       <button
         type="button"
         className="btn btn-primary"
@@ -47,6 +48,8 @@ const IssueDetailsModal = ({
       >
         Pending
       </button>
+      )}
+      {issue.status < 2 && (
       <button
         type="button"
         className="btn btn-success"
@@ -54,6 +57,7 @@ const IssueDetailsModal = ({
       >
         Done
       </button>
+      )}
     </div>
   </Modal>
 );

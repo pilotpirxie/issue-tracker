@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import doneIcon from './images/done_white_24dp.svg';
-import startIcon from './images/chevron_right_white_24dp.svg';
+import icon from './images/arrow_forward_ios_black_24dp.svg';
 
 import './IssueList.css';
 
 import { badges, badgesLabel } from '../../utils/constants';
 
 const IssueListItem = ({
-  title, status, id, onSetIssueStatus, onShowIssueDetails,
+  title, status, id, onShowIssueDetails,
 }) => (
   <div
     role="link"
@@ -27,30 +26,10 @@ const IssueListItem = ({
       </div>
     </div>
     <div className="d-flex justify-content-center align-items-center">
-      <div
-        role="button"
-        className="btn btn-sm btn-success"
-        onClick={() => onSetIssueStatus(id, 'DONE')}
-        onKeyDown={() => onSetIssueStatus(id, 'DONE')}
-        tabIndex={-1}
-      >
-        <img
-          src={doneIcon}
-          alt="Complete issue"
-        />
-      </div>
-      <div
-        role="button"
-        className="btn btn-sm btn-primary ml-2"
-        onClick={() => onSetIssueStatus(id, 'PENDING')}
-        onKeyDown={() => onSetIssueStatus(id, 'PENDING')}
-        tabIndex={-1}
-      >
-        <img
-          src={startIcon}
-          alt="Start working on issue"
-        />
-      </div>
+      <img
+        src={icon}
+        alt="Show details"
+      />
     </div>
   </div>
 );
@@ -60,12 +39,10 @@ IssueListItem.propTypes = {
   title: PropTypes.string.isRequired,
   status: PropTypes.oneOf([0, 1, 2]).isRequired,
   onShowIssueDetails: PropTypes.func,
-  onSetIssueStatus: PropTypes.func,
 };
 
 IssueListItem.defaultProps = {
   onShowIssueDetails: () => {},
-  onSetIssueStatus: () => {},
 };
 
 export default IssueListItem;

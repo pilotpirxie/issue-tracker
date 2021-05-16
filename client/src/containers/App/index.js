@@ -11,10 +11,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route
-          exact
-          path="/boards/:boardId/:boardKey"
-        >
+        <Route path="/boards/:boardId/:boardKey">
           <Board />
         </Route>
       </Switch>

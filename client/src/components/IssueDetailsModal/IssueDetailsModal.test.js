@@ -6,8 +6,11 @@ test('should render correct modal', () => {
   const { getByText } = render(
     <IssueDetailsModal
       isVisible
-      title="Modal title"
-      primaryButtonText="Submit"
+      issue={{
+        status: 0,
+        title: 'Modal title',
+        description: 'Lorem ipsum...',
+      }}
     >
       <p>Lorem ipsum</p>
     </IssueDetailsModal>,
@@ -15,17 +18,22 @@ test('should render correct modal', () => {
 
   expect(getByText(/Lorem ipsum/i)).toBeTruthy();
   expect(getByText(/Modal title/i)).toBeTruthy();
-  expect(getByText(/Submit/i)).toBeTruthy();
+  expect(getByText(/Pending/i)).toBeTruthy();
 });
 
-test('should render modal with pending button', () => {
+test('should render modal with done button', () => {
   const { getByText } = render(
     <IssueDetailsModal
       isVisible
+      issue={{
+        status: 1,
+        title: 'Modal title',
+        description: 'Lorem ipsum...',
+      }}
     >
       <p>Lorem ipsum</p>
     </IssueDetailsModal>,
   );
 
-  expect(getByText(/Cancel/i)).toBeTruthy();
+  expect(getByText(/Done/i)).toBeTruthy();
 });

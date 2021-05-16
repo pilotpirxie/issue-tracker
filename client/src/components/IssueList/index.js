@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import IssueListItem from './IssueListItem';
 
-const IssueList = ({ issues, onSetIssueStatus, onShowIssueDetails }) => (
+const IssueList = ({ issues, onShowIssueDetails }) => (
   <div className="list-group">
     {issues.map((issue) => (
       <IssueListItem
@@ -12,7 +12,6 @@ const IssueList = ({ issues, onSetIssueStatus, onShowIssueDetails }) => (
         status={issue.status}
         title={issue.title}
         onShowIssueDetails={onShowIssueDetails}
-        onSetIssueStatus={onSetIssueStatus}
       />
     ))}
   </div>
@@ -21,12 +20,10 @@ const IssueList = ({ issues, onSetIssueStatus, onShowIssueDetails }) => (
 IssueList.propTypes = {
   issues: PropTypes.arrayOf(PropTypes.object).isRequired,
   onShowIssueDetails: PropTypes.func,
-  onSetIssueStatus: PropTypes.func,
 };
 
 IssueList.defaultProps = {
   onShowIssueDetails: () => {},
-  onSetIssueStatus: () => {},
 };
 
 export default IssueList;
